@@ -1,3 +1,4 @@
+
 #!/usr/bin/python3
 
 # INET4031
@@ -69,3 +70,29 @@ def main():
 
 if _name_ == '_main_':
     main()
+=======
+import os
+
+# Open the input file and process each line
+with open("create-users.input", "r") as file:
+    for line in file:
+        fields = line.strip().split(":")
+        
+        # Check if the line has enough fields
+        if len(fields) < 5:
+            print(f"Skipping invalid entry: {line.strip()}")
+            continue
+        
+        username, password, last_name, first_name, groups = fields
+
+        # DRY RUN: Instead of executing, we just print the command
+        print(f"Creating user: {username}")
+        # os.system(f"useradd -m -p {password} -c '{first_name} {last_name}' {username}") # Uncomment for live run
+        
+        # Process group assignments
+        if groups != "-":
+            for group in groups.split(","):
+                print(f"Adding {username} to group {group}")
+                # os.system(f"usermod -aG {group} {username}") # Uncomment for live run
+
+>>>>>>> bfa5198 (Added comments explaining dry-run mode)
